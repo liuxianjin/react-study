@@ -168,3 +168,5 @@ function Profile(props) {
 
 我不好
 你好啊
+
+我挺好的
