@@ -155,7 +155,7 @@ function Profile({ person, size, isSepia, thickBorder }) {
 }
 ```
 重复代码没有错（它可以更清晰）。但有时你可能会重视简洁。一些组件将它们所有的 props 转发给子组件，正如 Profile 转给 Avatar 那样。因为这些组件不直接使用他们本身的任何 props，所以使用更简洁的“展开”语法是有意义的：
-```jsx
+`````jsx
 function Profile(props) {
   return (
     <div className="card">
@@ -165,3 +165,99 @@ function Profile(props) {
 }
 ```
 **请克制地使用展开语法。** 如果你在所有其他组件中都使用它，那就有问题了。 通常，它表示你应该拆分组件，并将子组件作为 JSX 传递。 接下来会详细介绍！
+
+### 条件渲染
+```jsx
+function Item({ name, isPacked }) {
+  if (isPacked) {
+    return <li className="item">{name} ✔</li>;
+  }
+  return <li className="item">{name}</li>;
+}
+
+export default function PackingList() {
+  return (
+    <section>
+      <h1>Sally Ride 的行李清单</h1>
+      <ul>
+        <Item 
+          isPacked={true} 
+          name="宇航服" 
+        />
+        <Item 
+          isPacked={true} 
+          name="带金箔的头盔" 
+        />
+        <Item 
+          isPacked={false} 
+          name="Tam 的照片" 
+        />
+      </ul>
+    </section>
+  );
+}
+```
+### 列表渲染
+```jsx
+export default function Gallery() {
+  const arr = [
+    {
+      src: "https://i.imgur.com/MK3eW3As.jpg",
+      alt: "Katherine Johnson"
+    },
+    {
+      src: "https://i.imgur.com/MK3eW3As.jpg",
+      alt: "Katherine Johnson"
+    },
+    {
+      src: "https://i.imgur.com/MK3eW3As.jpg",
+      alt: "Katherine Johnson"
+    },
+    {
+      src: "https://i.imgur.com/MK3eW3As.jpg",
+      alt: "Katherine Johnson"
+    }
+  ]
+  const profiles = arr.map(({src, alt}, index) => <Profile src={src} key={index} alt={alt}/>);
+  return (
+    <section>
+      {profiles}
+    </section>
+  );
+}
+
+export function Profile({src, alt}) {
+  return (
+    <>
+      <img
+        src={src}
+        alt={alt}
+      />
+    </>
+  );
+}
+```
+key 应该放到最外层
+```jsx
+import { recipes } from "./data.js";
+
+export default function RecipeList() {
+  let items = recipes.map(({ id, name, ingredients }) => {
+    let lis = ingredients.map((item) => <li key={item}>{item}</li>);
+    return (
+      <div key={id}>
+        <h2>{name}</h2>
+        <ul>{lis}</ul>
+      </div>
+    );
+  });
+
+  return (
+    <div>
+      <h1>菜谱</h1>
+      {items}
+    </div>
+  );
+}
+```
+

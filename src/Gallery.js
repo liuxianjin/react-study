@@ -1,20 +1,38 @@
 export default function Gallery() {
+  const arr = [
+    {
+      src: "https://i.imgur.com/MK3eW3As.jpg",
+      alt: "Katherine Johnson"
+    },
+    {
+      src: "https://i.imgur.com/MK3eW3As.jpg",
+      alt: "Katherine Johnson"
+    },
+    {
+      src: "https://i.imgur.com/MK3eW3As.jpg",
+      alt: "Katherine Johnson"
+    },
+    {
+      src: "https://i.imgur.com/MK3eW3As.jpg",
+      alt: "Katherine Johnson"
+    }
+  ]
+  const profiles = arr.map(({src, alt}, index) => <Profile src={src} key={index} alt={alt}/>);
   return (
     <section>
-      <h1>了不起的科学家们</h1>
-      <Profile/>
-      <Profile/>
-      <Profile/>
+      {profiles}
     </section>
   );
 }
 
-export function Profile() {
+export function Profile({src, alt}) {
   return (
-    <img
-      src="https://i.imgur.com/MK3eW3As.jpg"
-      alt="Katherine Johnson"
-    />
+    <>
+      <img
+        src={src}
+        alt={alt}
+      />
+    </>
   );
 }
 
