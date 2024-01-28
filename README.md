@@ -289,3 +289,4 @@ export default function RecipeList() {
 - 事件会向上传播。通过事件的第一个参数调用 e.stopPropagation() 来防止这种情况。
 - 事件可能具有不需要的浏览器默认行为。调用 e.preventDefault() 来阻止这种情况。
 - 从子组件显式调用事件处理函数 prop 是事件传播的另一种优秀替代方案。
+
