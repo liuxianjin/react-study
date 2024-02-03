@@ -1,4 +1,4 @@
-# 阅读 React 文档笔记
+# React 笔记
 ## 定义组件
 React 组件是一段可以 使用标签进行扩展 的 JavaScript 函数。
 ```js
